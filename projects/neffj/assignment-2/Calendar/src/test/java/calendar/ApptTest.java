@@ -36,12 +36,36 @@ public class ApptTest {
 		 assertEquals(2017, appt.getStartYear());
 		 assertEquals("Birthday Party", appt.getTitle());
 		 assertEquals("This is my birthday party.", appt.getDescription());         		
+		 assertEquals(0, appt.getRecurDays().length);
+		 assertEquals(2, appt.getRecurBy());
+		 assertEquals(0, appt.getRecurIncrement());
+		 assertEquals(0, appt.getRecurNumber());
+		 assertFalse(appt.isRecurring());
+         		
 	 }
 
 	 @Test
 	  public void test02()  throws Throwable  {
-		 
-	 }
+		Appt appt2 = new Appt(1, 1, 1, 1, 1, null, null);
+		appt2.setStartHour(25);
+		appt2.setStartHour(-1);
+		appt2.setStartHour(0);
+		appt2.setStartMinute(61);
+		appt2.setStartMinute(-1);
+		appt2.setStartMinute(1);
+		appt2.setStartDay(40);		 
+		appt2.setStartDay(1);		 
+		appt2.setStartDay(2);
+		//appt2.setStartMonth(100); any month outside of bounds causes a crash when calling NumDaysInMonth from calendarUtil.java
+		appt2.setStartMonth(2);		 
+		appt2.setStartYear(2017);
+		appt2.setTitle("Title");	
+		appt2.setDescription("Desc");	
+		appt2.toString();
+		appt2.setStartHour(23);
+		appt2.toString(); 
+	}
 //add more unit tests as you needed
-	
+
+
 }
