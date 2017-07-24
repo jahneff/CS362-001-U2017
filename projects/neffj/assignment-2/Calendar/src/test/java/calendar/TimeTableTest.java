@@ -119,6 +119,8 @@ public class TimeTableTest {
 		assertEquals(tt.getApptRange(startD.appts, start, end).size(), 31);
 	}
 	@Test
+	//tests the deleteAppt function. Deletes two valid appointment, attempts to
+	//delete an invalid appt and one that has already been deleted  
 	  public void test08()  throws Throwable  {
 		TimeTable tt = new TimeTable();
 		GregorianCalendar start= new GregorianCalendar(2017, 7, 20, 6, 30);
@@ -131,9 +133,33 @@ public class TimeTableTest {
 		Appt appt2 = new Appt(8, 70, 21, 7, 2017, "8:00 appt", "Weekly on 21st and then tuesdays, invalid");
 		appt2.setRecurrence(new int[] {3}, 1, 1, 4);	
 		startD.addAppt(appt2);	
-		tt.deleteAppt(startD.appts, appt2);
-		tt.deleteAppt(startD.appts, appt1);	
-		assertEquals(tt.getApptRange(startD.appts, start, end).size(), 31);
+		Appt appt3 = new Appt(8, 50, 21, 7, 2017, "8:00 appt", "Weekly on 21st and then tuesdays, valid");
+		appt3.setRecurrence(new int[] {3}, 1, 1, 4);	
+		startD.addAppt(appt3);	
+		tt.deleteAppt(startD.appts, appt1);
+		tt.deleteAppt(startD.appts, appt1);
+		tt.deleteAppt(startD.appts, appt2);	
+		tt.deleteAppt(startD.appts, appt3);	
+		tt.deleteAppt(startD.appts, null);
+		assertEquals(startD.appts.size(), 0);  	
 	}
-//add more unit tests as you needed
+	@Test
+	//tests the permute function. 
+	  public void test09()  throws Throwable  {
+		TimeTable tt = new TimeTable();
+		GregorianCalendar start= new GregorianCalendar(2017, 7, 20, 6, 30);
+		GregorianCalendar end= new GregorianCalendar(2017, 8, 20, 6, 30);
+		CalDay startD = new CalDay(start);	
+		CalDay endD = new CalDay(end);	
+		Appt appt1 = new Appt(23, 59, 21, 7, 2017, "11:59 appt", "Weekly, valid");
+		appt1.setRecurrence(new int[] {}, 1, 1, 1000);	
+		startD.addAppt(appt1);	
+		Appt appt2 = new Appt(8, 40, 21, 7, 2017, "8:00 appt", "Weekly on 21st and then tuesdays, valid, 8:40");
+		appt2.setRecurrence(new int[] {3}, 1, 1, 4);	
+		startD.addAppt(appt2);	
+		Appt appt3 = new Appt(8, 50, 21, 7, 2017, "8:00 appt", "Weekly on 21st and then tuesdays, valid, 8:40");
+		appt3.setRecurrence(new int[] {3}, 1, 1, 4);	
+		startD.addAppt(appt3);
+		tt.permute(startD.appts, new int[] {2, 1, 0});
+	}
 }
