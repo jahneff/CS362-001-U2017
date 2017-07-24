@@ -117,7 +117,7 @@ public class TimeTable {
 
 	                            
 	                //Keep cycling while the occurence day is in range
-	                if (!occurrenceDay.before(lastDay)) {
+	                if (occurrenceDay != null && !occurrenceDay.before(lastDay)) {
 	                    break;
 	                }
 	            }        
@@ -161,7 +161,7 @@ public class TimeTable {
 	                        //If the calendar is set to a day of the week that the
 	                        //appt recurs on then return that day.
 	                        if (recurDays[i] == newDayOfWeek) {
-	                            return null;
+	                            return nextDay;
 	                        }
 	                    }
 	                }
