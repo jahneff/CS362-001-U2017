@@ -43,7 +43,7 @@
 	<artifactId>pitest-maven</artifactId>
 	<version>1.2.0</version>
   	 <configuration>
-			<avoidCallsTo><!--A List of packages, classes and methods which are to be considered outside the scope of mutation.-->
+			<avoidCallsTo> <!--A List of packages, classes and methods which are to be considered outside the scope of mutation.-->
     				<avoidCallsTo>java.io.PrintStream</avoidCallsTo>
 			</avoidCallsTo>
 

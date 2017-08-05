@@ -70,8 +70,7 @@ public class ApptTest {
 		 assertEquals(2, appt2.getRecurIncrement());
 		 assertEquals(1000, appt2.getRecurNumber());
 		 assertTrue(appt2.isRecurring());
-         		
-	 }
+         }
 
 	 @Test
 	  public void test03()  throws Throwable  {
@@ -83,19 +82,28 @@ public class ApptTest {
 		assertFalse(appt3.getValid());
 		appt3.setStartHour(0);
 		assertTrue(appt3.getValid());
+		appt3.setStartHour(24);
+		assertTrue(appt3.getValid());
+
 		appt3.setStartMinute(61);
 		assertFalse(appt3.getValid());
+		appt3.setStartMinute(60);
+		assertTrue(appt3.getValid());
 		appt3.setStartMinute(-1);
 		assertFalse(appt3.getValid());
 		appt3.setStartMinute(0);
 		assertTrue(appt3.getValid());
+		
 		appt3.setStartDay(33);		 
 		assertFalse(appt3.getValid());
 		appt3.setStartDay(0);		 
 		assertFalse(appt3.getValid());
 		appt3.setStartDay(1);
 		assertTrue(appt3.getValid());
-	//any month outside of bounds causes a crash when calling NumDaysInMonth from calendarUtil.java
+		appt3.setStartDay(28);
+		assertTrue(appt3.getValid());
+		
+		//any month outside of bounds causes a crash when calling NumDaysInMonth from calendarUtil.java
 		//appt2.setStartMonth(13); 
 		//appt3.setStartMonth(-1);		 
 		//appt3.setStartMonth(1);		 
@@ -110,6 +118,6 @@ public class ApptTest {
 		appt3.setStartHour(23);
 		appt3.toString(); 
 		appt3.setStartHour(-1);
-		appt3.toString();	
+		appt3.toString(); 
 	}
 }
