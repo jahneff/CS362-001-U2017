@@ -295,7 +295,7 @@ public class Appt {
 		    return null;
 		}
          String day= this.getStartMonth()+"/"+this.getStartDay()+"/"+this.getStartYear() + " at ";
-        return "\t"+ day +  this.represntationApp()  + " ," +  getTitle()+ ", "+  getDescription()+"\n";
+        return day +  this.represntationApp()  + " ," +  getTitle()+ ", "+  getDescription();
     }
 
 

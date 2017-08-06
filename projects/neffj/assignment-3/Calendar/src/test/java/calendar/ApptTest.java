@@ -114,10 +114,12 @@ public class ApptTest {
 	//these cover all the branches in toString()	
 		appt3.setTitle("Title");	
 		appt3.setDescription("Desc");	
-		appt3.toString();
+		assertEquals("1/28/2018 at 12:0pm ,Title, Desc", appt3.toString()); 
 		appt3.setStartHour(23);
-		appt3.toString(); 
+		assertEquals("1/28/2018 at 11:0pm ,Title, Desc", appt3.toString()); 
 		appt3.setStartHour(-1);
-		appt3.toString(); 
+		assertEquals(null, appt3.toString());
+		appt3.setStartHour(11);
+		assertEquals("1/28/2018 at 11:0am ,Title, Desc", appt3.toString()); 
 	}
 }

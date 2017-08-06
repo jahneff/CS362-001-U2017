@@ -72,12 +72,10 @@ public class CalDay {
 	 * appointments can be added. The appointment can also be added twice.
 	 */
 	public void addAppt(Appt appt) {
-		if (appt.getValid()) {
-			for (int i = 0; i < getAppts().size(); i++) {
+		if (appt.getValid()){
+			for (int i = 0; i < this.getSizeAppts(); i++) {
 				//Put the appointment in the correct order - finish this
-				if (((Appt)getAppts().get(i)).getStartHour() >
-										appt.getStartHour()) {
-					
+				if (this.appts.getFirst().getStartHour() > appt.getStartHour()) {
 					getAppts().add(i, appt);
 					return;
 				}
@@ -112,11 +110,9 @@ public class CalDay {
 	
 	/** Sets appts */
 	private void setAppts(LinkedList<Appt> appts) {
-		if(appts!=null)
-				this.appts = appts;
-		
-		if(appts!=null&&appts.size()==0)
+		if(appts!=null){
 			this.appts = appts;
+		}
 	}
 	
 	/** Sets day */
@@ -140,11 +136,11 @@ public class CalDay {
 	}
 	/** Gets size of the Appts */
 	public int getSizeAppts() {
-	    return appts.size()-1;
+	    return appts.size();
 	}		
 	/** Gets day */
 	public int getDay() {
-	    return month;
+	    return day;
 	}
 	
 	/** 
@@ -172,8 +168,8 @@ public class CalDay {
 	
 		if (isValid()) {
 			String todayDate = (getMonth()) + "/" + getDay() + "/" + getYear();
-			sb.append("\t --- " + todayDate + " --- \n");
-			sb.append(" --- -------- Appointments ------------ --- \n");
+			sb.append(" --- " + todayDate + " ---");
+			sb.append(" --- -------- Appointments ------------ ---");
 			Iterator<Appt> itr = this.appts.iterator();
 		    while(itr.hasNext()) {
 		         Object element = itr.next();
@@ -182,7 +178,6 @@ public class CalDay {
 		      }
 		  
 //			sb.append(this.appts);
-			sb.append("\n");
 		}
        	 return sb.toString();
 
