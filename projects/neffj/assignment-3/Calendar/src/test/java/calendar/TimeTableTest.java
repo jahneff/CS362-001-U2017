@@ -6,7 +6,7 @@ package calendar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 import org.junit.Test;
@@ -37,8 +37,21 @@ public class TimeTableTest {
 		Appt appt = new Appt(23, 59, 21, 7, 2017, "Birthday", "Pool Party");
 		appt.setRecurrence(new int[] {1}, 1, 1, 4);	
 		startD.addAppt(appt);	
-		assertEquals(tt.getApptRange(startD.appts, start, end).size(), 31); 
-	 }
+		LinkedList<CalDay> days = new LinkedList<CalDay>();
+		days = tt.getApptRange(startD.appts, start, end);
+		assertEquals(tt.getApptRange(startD.appts, start, end).size(), 31);
+		CalDay day1 = new CalDay();
+		CalDay day2 = new CalDay();
+		CalDay day3 = new CalDay();
+		CalDay day4 = new CalDay();
+		day1 = days.get(7);
+		day2 = days.get(14);
+		day3 = days.get(21);
+		day4 = days.get(28);
+		assertEquals(day1.getAppts().getFirst(), day2.getAppts().getFirst());
+		assertEquals(day3.getAppts().getFirst(), day4.getAppts().getFirst());
+
+		}
 	//One month window, once a week recurrence on same day of week as start day  	
 	 @Test 
 	  public void test021()  throws Throwable  {
@@ -51,6 +64,19 @@ public class TimeTableTest {
 		appt.setRecurrence(new int[] {}, 1, 1, 4);	
 		startD.addAppt(appt);	
 		assertEquals(tt.getApptRange(startD.appts, start, end).size(), 31); 
+		LinkedList<CalDay> days = new LinkedList<CalDay>();
+		days = tt.getApptRange(startD.appts, start, end);
+		CalDay day1 = new CalDay();
+		CalDay day2 = new CalDay();
+		CalDay day3 = new CalDay();
+		CalDay day4 = new CalDay();
+		day1 = days.get(1);
+		day2 = days.get(8);
+		day3 = days.get(15);
+		day4 = days.get(22);
+		assertEquals(day1.getAppts().getFirst(), day2.getAppts().getFirst());
+		assertEquals(day3.getAppts().getFirst(), day4.getAppts().getFirst());
+
 	 }
 	//appt date is after end of window, should return blank linked list	
 	 @Test

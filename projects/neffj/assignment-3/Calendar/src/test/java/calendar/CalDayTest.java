@@ -44,7 +44,7 @@ public class CalDayTest {
 		assertEquals(3, day2.getSizeAppts());
 		//use the iterator and tostring function with a valid day
 		day2.iterator();
-		assertEquals(" --- 7/5/2017 --- --- -------- Appointments ------------ ---1/1/1 at 1:1am ,second appt, 1s in all fields 4/4/4 at 4:4am ,first appt, 4s in all fields 2/2/2 at 2:2am ,third appt, 2s in all fields ", day2.toString());
+		assertEquals(" --- 7/6/2017 --- --- -------- Appointments ------------ ---1/1/1 at 1:1am ,second appt, 1s in all fields 4/4/4 at 4:4am ,first appt, 4s in all fields 2/2/2 at 2:2am ,third appt, 2s in all fields ", day2.toString());
 	 }
 	 @Test
 	  public void test03()   throws Throwable  {
