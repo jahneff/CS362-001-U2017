@@ -176,7 +176,7 @@ public class TimeTable {
 	            case Appt.RECUR_BY_MONTHLY:
 	                //Just increment the month and return the day. Not sure what
 	                //happens when the day is 31 and the next month has 30 days...
-	                nextDay.add(nextDay.YEAR, 1);
+	                nextDay.add(nextDay.MONTH, 1);
 	                return nextDay;
 	            case Appt.RECUR_BY_YEARLY:
 	                //Just increment the year. The only possible problem is an 
