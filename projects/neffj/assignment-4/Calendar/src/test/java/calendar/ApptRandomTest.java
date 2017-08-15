@@ -16,14 +16,14 @@ import static org.junit.Assert.*;
  */
 
 public class ApptRandomTest {
-	private static final long TestTimeout = 60 * 500 * 1; /* Timeout at 30 seconds */
+	private static final long TestTimeout = 10 * 500 * 1; /* Timeout at 30 seconds */
 	private static final int NUM_TESTS=100;
 
 	/**
 	 * Return a randomly selected method to be tests !.
 	 */
     public static String RandomSelectMethod(Random random){
-        String[] methodArray = new String[] {"setTitle","setRecurrence"};// The list of the of methods to be tested in the Appt class
+        String[] methodArray = new String[] {"isValid","setDescription"};// The list of the of methods to be tested in the Appt class
 
     	int n = random.nextInt(methodArray.length);// get a random number between 0 (inclusive) and  methodArray.length (exclusive)
     	            
@@ -82,7 +82,7 @@ public class ApptRandomTest {
 				         description);
 			 if(!appt.getValid())continue;
 			for (int i = 0; i < NUM_TESTS; i++) {
-					String methodName = ApptRandomTest.RandomSelectMethod(random);
+					   String methodName = ApptRandomTest.RandomSelectMethod(random);
 					   if (methodName.equals("setTitle")){
 						   String newTitle=(String) ValuesGenerator.getString(random);
 						   appt.setTitle(newTitle);						   
@@ -95,6 +95,27 @@ public class ApptRandomTest {
 						   int recurNumber=ApptRandomTest.RandomSelectRecurForEverNever(random);
 						   appt.setRecurrence(recurDays, recur, recurIncrement, recurNumber);
 						}				
+					   else if (methodName.equals("isValid")){
+						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, 25, 100));
+						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, 0, 24));
+						
+						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 61, 100));
+						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 0, 60));
+						 
+						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, 32, 100));
+						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, 1, 31));
+			  			
+						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, 14, 100));
+						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, 1, 12));
+						
+						}
+					   else if (methodName.equals("setDescription")){
+						appt.setDescription(ValuesGenerator.getString(random));
+					   }
 				}
 				
 				 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);

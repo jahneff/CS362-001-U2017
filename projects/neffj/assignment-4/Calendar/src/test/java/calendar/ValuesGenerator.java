@@ -20,6 +20,7 @@ public class ValuesGenerator {
 	 * This generates a coin flip with a probability <tt>probability</tt> of
 	 * returning true, else returning false.
 	 */
+
 	public static boolean getBoolean(float probability, Random random){
 		return random.nextFloat() < probability;
 	}
@@ -36,7 +37,7 @@ public class ValuesGenerator {
 	}
 	public static String getString(Random random) {
 
-	    if (ValuesGenerator.getBoolean(SET_TO_NULL,random))	return null;
+	    if (ValuesGenerator.getBoolean(SET_TO_NULL,random)){	return null;}
 
 	    final int randNum;
 	    
@@ -59,7 +60,6 @@ public class ValuesGenerator {
 	 * @return get a random number between MIN_VALUE (inclusive) and  MAX_VALUE (inclusive)    
 	 */
 	public static int getRandomIntBetween(Random random, int min, int max) {
-		
 		long range       = (long)max - (long)min + 1;
 		long fraction    = (long)(range * random.nextDouble());
 	    int randomNumber = (int)(fraction + min); 

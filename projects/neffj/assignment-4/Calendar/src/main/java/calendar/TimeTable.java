@@ -34,8 +34,8 @@ public class TimeTable {
 	     
 	        //Make sure that the first day is before the last day
 	        if (!firstDay.before(lastDay)) {
-	        	throw new DateOutOfRangeException ("Second date specified is not  before the first date specified.");
-	        }
+	        	throw new DateOutOfRangeException ("Second date specified is not before the first date specified.");
+		 }
 	        
 	        
 	        //Create the first CalDay object with the starting date and add to list
@@ -67,7 +67,7 @@ public class TimeTable {
 					nextDay.add(nextDay.DAY_OF_MONTH, 1);
 				}
 
-				CalDay calDayOfAppt = (CalDay) calDays.get(daysDifference);
+				CalDay calDayOfAppt = (CalDay) calDays.get(daysDifference-1);
 				calDayOfAppt.addAppt(appt);
 
 			}
