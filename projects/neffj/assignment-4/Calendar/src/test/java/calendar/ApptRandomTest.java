@@ -97,24 +97,38 @@ public class ApptRandomTest {
 						}				
 					   else if (methodName.equals("isValid")){
 						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, 25, 100));
+						assertFalse(appt.getValid());
 						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						assertFalse(appt.getValid());
 						appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, 0, 24));
+						assertTrue(appt.getValid());
 						
 						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 61, 100));
+						assertFalse(appt.getValid());
 						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						assertFalse(appt.getValid());
 						appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 0, 60));
+						assertTrue(appt.getValid());
 						 
 						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, 32, 100));
+						assertFalse(appt.getValid());
 						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						assertFalse(appt.getValid());
 						appt.setStartDay(ValuesGenerator.getRandomIntBetween(random, 1, 31));
+						assertTrue(appt.getValid());
 			  			
 						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, 14, 100));
+						assertFalse(appt.getValid());
 						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, -100, -1));
+						assertFalse(appt.getValid());
 						appt.setStartMonth(ValuesGenerator.getRandomIntBetween(random, 1, 12));
+						assertTrue(appt.getValid());
 						
 						}
 					   else if (methodName.equals("setDescription")){
-						appt.setDescription(ValuesGenerator.getString(random));
+						String str = new String(ValuesGenerator.getString(random));
+						appt.setDescription(str);
+						assertEquals(appt.getDescription(), str);
 					   }
 				}
 				

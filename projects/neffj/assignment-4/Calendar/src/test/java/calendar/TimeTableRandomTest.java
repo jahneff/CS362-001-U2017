@@ -59,7 +59,7 @@ public class TimeTableRandomTest {
 				
 				 int startHour=ValuesGenerator.RandInt(random);
 				 int startMinute=ValuesGenerator.RandInt(random);
-				 int startDay=ValuesGenerator.RandInt(random);;
+				 int startDay=ValuesGenerator.RandInt(random);
 				 int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 10);;
 				 int startYear=ValuesGenerator.RandInt(random);
 				 String title="Birthday Party";
@@ -74,8 +74,8 @@ public class TimeTableRandomTest {
 				         description);
 				 int startHour2=ValuesGenerator.RandInt(random);
 				 int startMinute2=ValuesGenerator.RandInt(random);
-				 int startDay2=ValuesGenerator.RandInt(random);;
-				 int startMonth2=ValuesGenerator.RandInt(random);;
+				 int startDay2=ValuesGenerator.RandInt(random);
+				 int startMonth2=ValuesGenerator.RandInt(random);
 				 int startYear2=ValuesGenerator.RandInt(random);
 				 String title2="Birthday Party";
 				 String description2="This is my birthday party.";
@@ -97,22 +97,22 @@ public class TimeTableRandomTest {
 				 int randMonth2 = randMonth+2;
 				 int randDay2 = startDay;
 				
-				 GregorianCalendar greg1 = new GregorianCalendar(randYear, randMonth, randDay, 6, 30);
-				 GregorianCalendar greg2 = new GregorianCalendar(randYear, randMonth2, randDay, 6, 30);
-				 CalDay day1 = new CalDay(greg1);
-				 CalDay day2 = new CalDay(greg2);
+				 GregorianCalendar greg1 = new GregorianCalendar(randYear, 2, randDay, 6, 30);
+				 GregorianCalendar greg2 = new GregorianCalendar(randYear, 4, randDay, 6, 30);
 				 TimeTable tt = new TimeTable();
 				 appt.setRecurrence(new int[] {}, 1, 1, 4);
 				 appt2.setRecurrence(new int[] {}, 1, 1, 4);
 			 if(!appt.getValid())continue;
 			for (int i = 0; i < NUM_TESTS; i++) {
+				CalDay day1 = new CalDay(greg1);
+				CalDay day2 = new CalDay(greg2);
 				String methodName = TimeTableRandomTest.RandomSelectMethod(random);
 				appt2.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 0, 80));
 				day1.addAppt(appt);
 				day1.addAppt(appt2);
-				appt.setStartMinute(ValuesGenerator.getRandomIntBetween(random, 0, 80));
 			        if (methodName.equals("getApptRange")){
 				tt.getApptRange(day1.appts, greg1, greg2);
+				assertEquals(61, tt.getApptRange(day1.appts, greg1, greg2).size());
 				try{
 					tt.getApptRange(day1.appts, greg2, greg1);
 				}catch(DateOutOfRangeException ex) {}
@@ -122,7 +122,6 @@ public class TimeTableRandomTest {
 					tt.deleteAppt(null, appt);
 					tt.deleteAppt(day1.appts, null);
 					tt.deleteAppt(day1.appts, appt3);
-		
 				}
 					
 			}	

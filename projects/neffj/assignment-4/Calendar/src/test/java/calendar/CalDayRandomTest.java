@@ -80,17 +80,25 @@ public class CalDayRandomTest {
 				          title2,
 				         description2);
 
-				 int randYear = ValuesGenerator.getRandomIntBetween(random, 1900, 2100);
-				 int randMonth = ValuesGenerator.getRandomIntBetween(random, 1, 12);
-				 int randDay = ValuesGenerator.getRandomIntBetween(random, 1, 30);
-			 	
-				 GregorianCalendar greg = new GregorianCalendar(randYear, randMonth, randDay);
-				 CalDay day = new CalDay(greg);
 			 if(!appt.getValid())continue;
 			for (int i = 0; i < NUM_TESTS; i++) {
+				int randYear = ValuesGenerator.getRandomIntBetween(random, 1900, 2100);
+				int randMonth = ValuesGenerator.getRandomIntBetween(random, 1, 12);
+				int randDay = ValuesGenerator.getRandomIntBetween(random, 1, 30);
+			 	GregorianCalendar greg = new GregorianCalendar(randYear, randMonth, randDay);
+				CalDay day = new CalDay(greg);
 				appt.setStartHour(ValuesGenerator.getRandomIntBetween(random, 1, 30)); 
 				day.addAppt(appt);
 				day.addAppt(appt2);
+				if (appt.getValid() && appt2.getValid()){
+					assertEquals(2, day.getSizeAppts());
+				}
+				else if (!appt.getValid() && !appt2.getValid()){
+					assertEquals(0, day.getSizeAppts()); 
+				} 
+				else {
+					assertEquals(1, day.getSizeAppts()); 
+				}
 			}
 		 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);
 		 if((iteration%10000)==0 && iteration!=0 )
