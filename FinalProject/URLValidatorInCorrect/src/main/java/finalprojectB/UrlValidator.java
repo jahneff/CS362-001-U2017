@@ -155,7 +155,7 @@ public class UrlValidator implements Serializable {
     private static final String LEGAL_ASCII_REGEX = "^\\p{ASCII}+$";
     private static final Pattern ASCII_PATTERN = Pattern.compile(LEGAL_ASCII_REGEX);
 
-    private static final String PORT_REGEX = "^:(\\d{1,3})$";
+    private static final String PORT_REGEX = "^:(\\d{1,4})$";
     private static final Pattern PORT_PATTERN = Pattern.compile(PORT_REGEX);
 
     /**
@@ -265,7 +265,6 @@ public class UrlValidator implements Serializable {
             this.allowedSchemes = new HashSet();
             this.allowedSchemes.addAll(Arrays.asList(schemes));
         }
-
         this.authorityValidator = authorityValidator;
 
     }
@@ -358,6 +357,8 @@ public class UrlValidator implements Serializable {
      * @return true if authority (hostname and port) is valid.
      */
     protected boolean isValidAuthority(String authority) {
+        System.out.println(authority);
+
         if (authority == null) {
             return false;
         }
@@ -377,13 +378,18 @@ public class UrlValidator implements Serializable {
         String hostLocation = authorityMatcher.group(PARSE_AUTHORITY_HOST_IP);
         // check if authority is hostname or IP address:
         // try a hostname first since that's much more likely
+        System.out.println("Allow Local: " + isOn(ALLOW_LOCAL_URLS));
+
         DomainValidator domainValidator = DomainValidator.getInstance(isOn(ALLOW_LOCAL_URLS));
+        //System.out.println("gates");
         if (!domainValidator.isValid(hostLocation)) {
+            //System.out.println("courtyard");
             // try an IP address
             InetAddressValidator inetAddressValidator =
                 InetAddressValidator.getInstance();
             if (!inetAddressValidator.isValid(hostLocation)) {
                 // isn't either one, so the URL is invalid
+
                 return false;
             }
         }
@@ -391,6 +397,8 @@ public class UrlValidator implements Serializable {
         String port = authorityMatcher.group(PARSE_AUTHORITY_PORT);
         if (port != null) {
             if (!PORT_PATTERN.matcher(port).matches()) {
+                System.out.println("here");
+
                 return false;
             }
         }
@@ -487,7 +495,7 @@ public class UrlValidator implements Serializable {
      * @return whether the specified flag value is on.
      */
     private boolean isOn(long flag) {
-        return (this.options & flag) > 0;
+        return ((this.options & flag) > 0);
     }
 
     /**
