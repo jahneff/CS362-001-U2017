@@ -152,8 +152,12 @@ public class DomainValidator implements Serializable {
      */
     public boolean isValidTld(String tld) {
         if(allowLocal && isValidLocalTld(tld)) {
-           return true;
+            System.out.println("allow local is on, local tld valid, returning true");
+            return true;
         }
+        System.out.println(isValidInfrastructureTld(tld));
+        System.out.println(isValidGenericTld(tld));
+        System.out.println(isValidCountryCodeTld(tld));
         return isValidInfrastructureTld(tld)
                 || isValidGenericTld(tld)
                 || isValidCountryCodeTld(tld);
@@ -200,8 +204,7 @@ public class DomainValidator implements Serializable {
      * @return true if the parameter is an local TLD
      */
     public boolean isValidLocalTld(String iTld) {
-        
-    	return !LOCAL_TLD_LIST.contains(chompLeadingDot(iTld.toLowerCase()));
+    	return LOCAL_TLD_LIST.contains(chompLeadingDot(iTld.toLowerCase())); //changed ! to ()?? changed back
     }
 
     private String chompLeadingDot(String str) {
